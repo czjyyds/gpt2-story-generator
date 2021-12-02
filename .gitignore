@@ -14,3 +14,6 @@ pip-log.txt
 
 # Models
 model/*
+
+# Test script
+test.py
