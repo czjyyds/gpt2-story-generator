@@ -1,0 +1,16 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Installer logs
+pip-log.txt
+
+# IntelliJ’s projec files
+.idea
+
+# Mac files
+.DS_Store
+
+# Models
+model/*
