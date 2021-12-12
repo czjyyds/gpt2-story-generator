@@ -8,8 +8,9 @@ https://github.com/imcaspar/gpt2-ml
 
 ## Run Locally - Using Docker
 1. Install Docker/Docker Desktop https://docs.docker.com/get-docker/
-2. Clone this repository.
-3. run `bin/start` to start the Python container, run `bin/stop` to stop the Python container. The first time you run `bin/start`, it will automatically download the model, which will take a while.
+2. The container will require at least 6G memory.
+3. Clone this repository.
+4. run `bin/start` to start the Python container, run `bin/stop` to stop the Python container. The first time you run `bin/start`, it will automatically download the model, which will take a while.
 
 ## Run Locally - Hosted
 1. Clone this repository.
@@ -21,8 +22,10 @@ and place the model files in `model` directory.
 
 ## Generate API Endpoint
 The generation API endpoint will be hosted at http://127.0.0.1:8000/v1/gpt2/generate
+
 A prefix argument is required. e.g. http://127.0.0.1:8000/v1/gpt2/generate?prefix=测试
-You will be able to change Python code under `src` directory and test the change without needing to restart your docker container or the Uvicorn server.
+
+You will be able to change Python code under `src` directory and test the change without needing to restart your docker container or the Uvicorn server. 
 A bi-directional sync between your host and the docker container is implemented using Docker bind mount and auto reload mode from Uvicorn. 
 
 ## Run on Google Colab
