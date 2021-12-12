@@ -11,7 +11,7 @@ import tensorflow.compat.v1 as tf
 import numpy as np
 from train.modeling import GroverConfig, sample
 from tokenization import tokenization
-
+import opencc
 
 class Generate(object):
 
@@ -71,8 +71,13 @@ class Generate(object):
         saver = tf.train.Saver()
         saver.restore(self.sess, ckpt_fn)
 
+        self.convert2tc = opencc.OpenCC('s2t.json')
+        self.convert2sc = opencc.OpenCC('t2s.json')
+
     def generate(self, prefix):
-        line = tokenization.convert_to_unicode(prefix)
+        tmp = line = tokenization.convert_to_unicode(prefix)
+        line = self.convert2sc.convert(line)
+        need_convert = (tmp != line)
         bert_tokens = self.tokenizer.tokenize(line)
         encoded = self.tokenizer.convert_tokens_to_ids(bert_tokens)
         context_formatted = []
@@ -94,7 +99,10 @@ class Generate(object):
 
         # TODO: removing the prefix from generated result is not working intermittently.
         #  This may be due to the prefix containing punctuation, or certain special chars. Need to investigate.
-        generated = generated.replace(prefix, "")
+        generated = generated.replace(line, "")
+
+        if need_convert:
+            generated = self.convert2tc.convert(generated)
 
         return generated
 

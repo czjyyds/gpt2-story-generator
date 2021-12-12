@@ -17,3 +17,9 @@ model/*
 
 # Test script
 test.py
+
+# Visual Studio Code
+.vscode
+
+# venv
+.venv
