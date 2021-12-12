@@ -3,8 +3,9 @@ version: '3.8'
 services:
   app:
     build: .
-    command: uvicorn app.main:app --host 0.0.0.0
+    command: uvicorn main:app --host 0.0.0.0 --reload
     volumes:
-      - .:/app
+       - ./src:/app/src:cached
     ports:
       - 8000:8000
+    working_dir: /app/src

@@ -17,7 +17,7 @@ class Generate(object):
 
     def __init__(self):
         # TODO: move the hardcoded vars into a configuration file
-        ckpt_fn = 'model/model.ckpt-430000'
+        ckpt_fn = '../model/model.ckpt-430000'
         config_fn = 'configs/mega.json'
         vocab_file_path = "tokenization/clue-vocab.txt"
         batch_size = 1

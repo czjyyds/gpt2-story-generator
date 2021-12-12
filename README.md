@@ -6,13 +6,24 @@ A simple Python module that wraps and refactors the existing generation scripts 
 https://github.com/imcaspar/gpt2-ml
 
 
-## Run Locally
+## Run Locally - Using Docker
+1. Install Docker/Docker Desktop https://docs.docker.com/get-docker/
+2. Clone this repository.
+3. run `bin/start` to start the Python container, run `bin/stop` to stop the Python container. The first time you run `bin/start`, it will automatically download the model, which will take a while.
 
+## Run Locally - Hosted
 1. Clone this repository.
 2. Install Python. This repo is tested with Python 3.7.9.
 3. Install the required modules from `requirements.txt`, or `requirements-gpu.txt` if you have supported GPUs to use.
 4. Download pretrained models https://drive.google.com/drive/folders/1-DsHiKRvPpJk3V5v-wYzovtDMXtL6Tt8
 and place the model files in `model` directory.
+5. (Option) If you also want to set a Fastapi endpoint to test generation, use `requirements-fastapi.txt` instead. Then run `uvicorn main:app --host 0.0.0.0 --reload` from `src` directory to start the Uvicorn server.
+
+## Generate API Endpoint
+The generation API endpoint will be hosted at http://127.0.0.1:8000/v1/gpt2/generate
+A prefix argument is required. e.g. http://127.0.0.1:8000/v1/gpt2/generate?prefix=测试
+You will be able to change Python code under `src` directory and test the change without needing to restart your docker container or the Uvicorn server.
+A bi-directional sync between your host and the docker container is implemented using Docker bind mount and auto reload mode from Uvicorn. 
 
 ## Run on Google Colab
 https://colab.research.google.com/drive/1yRGIMiUxPEjd49U5rRWsDCBu8pb-7P8D
