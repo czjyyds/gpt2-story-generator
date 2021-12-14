@@ -783,7 +783,7 @@ def sample(news_config: GroverConfig, initial_context, eos_token, min_len, ignor
             return tf.logical_not(tf.logical_and(is_eos, is_len))
 
         tokens, cache, probs = tf.while_loop(
-            cond=cond, body=body, maximum_iterations=30,
+            cond=cond, body=body, maximum_iterations=150,
             loop_vars=[ctx, cache, probs],
             shape_invariants=[tf.TensorShape([batch_size, None]),
                               tf.TensorShape(
