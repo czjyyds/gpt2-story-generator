@@ -20,8 +20,8 @@ import math
 import six
 import tensorflow.compat.v1 as tf
 
-from train import optimization_adafactor
-from train.utils import get_assignment_map_from_checkpoint, get_shape_list, get_attention_mask, gelu, layer_norm, dropout, \
+from generation.train import optimization_adafactor
+from generation.train.utils import get_assignment_map_from_checkpoint, get_shape_list, get_attention_mask, gelu, layer_norm, dropout, \
     construct_scalar_host_call
 
 class GroverConfig(object):

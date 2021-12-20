@@ -17,8 +17,8 @@
 
 import tensorflow.compat.v1 as tf
 
-from train.dataloader import input_fn_builder
-from train.modeling import model_fn_builder, GroverConfig
+from generation.train.dataloader import input_fn_builder
+from generation.train.modeling import model_fn_builder, GroverConfig
 
 flags = tf.flags
 
