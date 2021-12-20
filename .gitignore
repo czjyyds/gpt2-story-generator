@@ -13,7 +13,10 @@ pip-log.txt
 .DS_Store
 
 # Models
-model/*
+src/generation/model/*
+!src/generation/model/.gitkeep
+src/video_search/model/*
+!src/video_search/model/.gitkeep
 
 # Test script
 test.py
@@ -23,3 +26,8 @@ test.py
 
 # venv
 .venv
+venv
+
+# discord files and directories
+generated/*
+!generated/.gitkeep

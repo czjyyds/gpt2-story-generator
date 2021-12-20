@@ -9,17 +9,17 @@ import os
 import re
 import tensorflow.compat.v1 as tf
 import numpy as np
-from train.modeling import GroverConfig, sample
-from tokenization import tokenization
+from generation.train.modeling import GroverConfig, sample
+from generation.tokenization import tokenization
 import opencc
 
 class Generate(object):
 
     def __init__(self):
         # TODO: move the hardcoded vars into a configuration file
-        ckpt_fn = '../model/model.ckpt-430000'
-        config_fn = 'configs/mega.json'
-        vocab_file_path = "tokenization/clue-vocab.txt"
+        ckpt_fn = os.path.join(os.path.dirname(__file__), 'model/model.ckpt-430000')
+        config_fn = os.path.join(os.path.dirname(__file__), 'configs/mega.json')
+        vocab_file_path = os.path.join(os.path.dirname(__file__), 'tokenization/clue-vocab.txt')
         batch_size = 1
         max_batch_size = None
 
