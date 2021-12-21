@@ -31,3 +31,6 @@ venv
 # discord files and directories
 generated/*
 !generated/.gitkeep
+
+# discord bot config
+src/config.ini
