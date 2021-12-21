@@ -37,7 +37,14 @@ def phash_c(img):
 
 def hamming_distance(hash1, hash2):
     # return sum(elm1 != elm2 for elm1, elm2 in zip(hash1, hash2))
-    return np.count_nonzero(hash1 != hash2)
+    length = hash1.shape[0]
+    diff = hash1 != hash2
+    num_seg = 4
+    seg_length = int(np.floor(length / num_seg))
+    hd = 0
+    for seg in range(1, num_seg + 1):
+        hd += np.count_nonzero(diff[0:(seg * seg_length)])
+    return hd
 
 
 
@@ -89,7 +96,7 @@ def find_vid(pic_path:str, dataset_path:str =  os.path.join(os.path.dirname(__fi
         vid_path = sorted_similarity_list[idx][0].split('/')
         vid_path_to_disp = str(idx + 1) + '\t' +vid_path[-2] + '\t' + vid_path[-1]  # +'\t' + str(sorted_similarity_list[idx][1])
         vid_time = datetime.timedelta(seconds=sorted_similarity_list[idx][2] * 4)
-        res = res + vid_path_to_disp + '\t    @{}\n'.format(vid_time)
+        res = res + vid_path_to_disp + '\t    @  {}\n'.format(vid_time)
 
     return res
 
