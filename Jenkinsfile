@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Cleanup') {
             steps {
-                discordSend description: "Build ${BUILD_DISPLAY_NAME} started", result: true, unstable: false, title: "${JOB_NAME}", webhookURL: "${WEBHOOK_URL}"
+                discordSend description: "Build ${BUILD_DISPLAY_NAME} started", result: "SUCCESS", unstable: false, title: "${JOB_NAME}", webhookURL: "${WEBHOOK_URL}"
                 script {
                     sh 'docker-compose down'
                     try {
