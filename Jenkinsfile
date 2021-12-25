@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Cleanup') {
             steps {
+                discordSend description: "Build ${BUILD_DISPLAY_NAME} started", result: true, unstable: false, title: "${JOB_NAME}", webhookURL: "${WEBHOOK_URL}"
                 script {
                     sh 'docker-compose down'
                     try {
@@ -28,6 +29,11 @@ pipeline {
             steps {
                 sh 'sleep 60'
             }
+        }
+    }
+    post {
+        always {
+            discordSend description: "Build ${BUILD_DISPLAY_NAME} succeeded after ${currentBuild.durationString.minus(' and counting')}", result: "${currentBuild.currentResult}", unstable: false, title: "${JOB_NAME}", webhookURL: "${WEBHOOK_URL}"
         }
     }
 }
