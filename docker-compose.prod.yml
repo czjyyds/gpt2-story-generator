@@ -24,7 +24,7 @@ services:
     command: --max_allowed_packet=64M
     env_file: env/db.env
     ports:
-      - 3306:3306
+      - 3307:3306
     volumes:
       - dbdata:/var/lib/mysql
 
