@@ -28,12 +28,5 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
 
-  phpmyadmin:
-    image: phpmyadmin
-    ports:
-      - 9090:80
-    environment:
-      - PMA_ARBITRARY=1
-
 volumes:
   dbdata:
