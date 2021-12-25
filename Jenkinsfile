@@ -33,7 +33,7 @@ pipeline {
     }
     post {
         always {
-            discordSend description: "Build ${BUILD_DISPLAY_NAME} succeeded after ${currentBuild.durationString.minus(' and counting')}", result: "${currentBuild.currentResult}", unstable: false, title: "${JOB_NAME}", webhookURL: "${WEBHOOK_URL}"
+            discordSend description: "Build ${BUILD_DISPLAY_NAME} ${currentBuild.currentResult.toLowerCase()} after ${currentBuild.durationString.minus(' and counting')}", result: "${currentBuild.currentResult}", unstable: false, title: "${JOB_NAME}", webhookURL: "${WEBHOOK_URL}"
         }
     }
 }
