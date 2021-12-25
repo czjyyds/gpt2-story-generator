@@ -1,5 +1,6 @@
 fastapi
 uvicorn
+opencv-python
 pandas==0.24.2
 regex==2019.4.14
 h5py==2.10.0

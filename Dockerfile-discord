@@ -1,0 +1,18 @@
+FROM python:3.7.9
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+
+COPY . .
+
+RUN curl -o /app/src/generation/model/model.ckpt-430000.meta http://static.spanking.wiki/models/model.ckpt-430000.meta
+RUN curl -o /app/src/generation/model/model.ckpt-430000.index http://static.spanking.wiki/models/model.ckpt-430000.index
+RUN curl -o /app/src/generation/model/model.ckpt-430000.data-00000-of-00001 http://static.spanking.wiki/models/model.ckpt-430000.data-00000-of-00001
+
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get install -y ffmpeg
+
+RUN pip install -r requirements-discord.txt
