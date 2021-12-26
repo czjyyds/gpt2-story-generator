@@ -1,11 +1,41 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
-    command: uvicorn main:app --host 0.0.0.0 --reload
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile-api
+    command:  uvicorn api:app --host 0.0.0.0 --reload
     volumes:
        - ./src:/app/src:cached
     ports:
       - 8000:8000
     working_dir: /app/src
+
+  discord:
+    build:
+      context: .
+      dockerfile: Dockerfile-discord
+    command: python discord_bot.py
+    ports:
+      - 8080:8080
+    working_dir: /app/src
+
+  db:
+    image: mariadb:10.4
+    command: --max_allowed_packet=64M
+    env_file: env/db.env
+    ports:
+      - 3306:3306
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 9090:80
+    environment:
+      - PMA_ARBITRARY=1
+
+volumes:
+  dbdata:
