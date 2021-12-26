@@ -15,6 +15,8 @@ pipeline {
                     try {
                       sh 'docker rmi $(docker images -q)'
                     } catch (err) {}
+                    sh "rm ${WORKSPACE}/src/config.ini"
+                    sh "cp ${CONFIG_FILE_PATH} ${WORKSPACE}/src/"
                 }
             }
         }
