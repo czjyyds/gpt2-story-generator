@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Cleanup') {
             steps {
+                discordSend description: "Build ${BUILD_DISPLAY_NAME} started", result: "SUCCESS", unstable: false, title: "${JOB_NAME}", webhookURL: "${WEBHOOK_URL}"
                 script {
                     sh 'docker-compose down'
                     try {
@@ -14,6 +15,8 @@ pipeline {
                     try {
                       sh 'docker rmi $(docker images -q)'
                     } catch (err) {}
+                    sh "rm ${WORKSPACE}/src/config.ini"
+                    sh "cp ${CONFIG_FILE_PATH} ${WORKSPACE}/src/"
                 }
             }
         }
@@ -32,7 +35,7 @@ pipeline {
     }
     post {
         always {
-            discordSend description: "Build ${BUILD_DISPLAY_NAME} succeeded after ${currentBuild.durationString.minus(' and counting')}", result: "${currentBuild.currentResult}", unstable: false, title: "${JOB_NAME}", webhookURL: "${WEBHOOK_URL}"
+            discordSend description: "Build ${BUILD_DISPLAY_NAME} ${currentBuild.currentResult.toLowerCase()} after ${currentBuild.durationString.minus(' and counting')}", result: "${currentBuild.currentResult}", unstable: false, title: "${JOB_NAME}", webhookURL: "${WEBHOOK_URL}"
         }
     }
 }
