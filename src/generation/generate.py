@@ -12,6 +12,19 @@ import numpy as np
 from generation.train.modeling import GroverConfig, sample
 from generation.tokenization import tokenization
 import opencc
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
+
+log_file = os.path.join(os.path.dirname(__file__), 'log/generate.log')
+file_handler = logging.FileHandler(log_file)
+file_handler.setFormatter(formatter)
+
+logger.addHandler(file_handler)
+
 
 class Generate(object):
 
@@ -103,6 +116,8 @@ class Generate(object):
 
         if need_convert:
             generated = self.convert2tc.convert(generated)
+
+        logger.info('\nprefix:{}\ngenerated:{}'.format(prefix, generated))
 
         return generated
 

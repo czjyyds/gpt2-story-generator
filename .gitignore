@@ -34,3 +34,6 @@ generated/*
 
 # discord bot config
 src/config.ini
+
+# log files
+*.log
