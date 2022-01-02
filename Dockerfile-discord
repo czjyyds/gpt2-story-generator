@@ -7,21 +7,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN curl -o /app/src/generation/model/model.ckpt-430000.meta http://static.spanking.wiki/models/model.ckpt-430000.meta
-RUN curl -o /app/src/generation/model/model.ckpt-430000.index http://static.spanking.wiki/models/model.ckpt-430000.index
-RUN curl -o /app/src/generation/model/model.ckpt-430000.data-00000-of-00001 http://static.spanking.wiki/models/model.ckpt-430000.data-00000-of-00001
-
-RUN curl -o /app/src/video_search/model/spm.pkl http://static.spanking.wiki/models/spm.pkl
-RUN curl -o /app/src/video_search/model/spanked_in_uniform.pkl http://static.spanking.wiki/models/spanked_in_uniform.pkl
-RUN curl -o /app/src/video_search/model/nuwest.pkl http://static.spanking.wiki/models/nuwest.pkl
-RUN curl -o /app/src/video_search/model/no_blacklupus.pkl http://static.spanking.wiki/models/no_blacklupus.pkl
-RUN curl -o /app/src/video_search/model/no_blackcherry.pkl http://static.spanking.wiki/models/no_blackcherry.pkl
-RUN curl -o /app/src/video_search/model/japsp.pkl http://static.spanking.wiki/models/japsp.pkl
-RUN curl -o /app/src/video_search/model/hsp.pkl http://static.spanking.wiki/models/hsp.pkl
-RUN curl -o /app/src/video_search/model/handuty.pkl http://static.spanking.wiki/models/handuty.pkl
-RUN curl -o /app/src/video_search/model/cnsp.pkl http://static.spanking.wiki/models/cnsp.pkl
-RUN curl -o /app/src/video_search/model/ab.pkl http://static.spanking.wiki/models/ab.pkl
-
 RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install -y ffmpeg
