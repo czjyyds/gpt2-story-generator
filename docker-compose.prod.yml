@@ -1,14 +1,28 @@
 version: '3.8'
 
 services:
+  traefik:
+    image: traefik
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - $PWD/services/traefik/traefik.toml:/etc/traefik/traefik.toml
+      - traefik-public-certificates:/certificates
+
   api:
     build:
       context: .
       dockerfile: Dockerfile-api
     command: uvicorn api:app --host 0.0.0.0
-    ports:
-      - 8000:8000
     working_dir: /app/src
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.app-http.rule=Host(`api.spanking.wiki`)
+      - traefik.http.routers.app-http.tls=true
+      - traefik.http.routers.app-http.tls.certresolver=letsencrypt
 
   discord:
     build:
@@ -29,4 +43,5 @@ services:
       - dbdata:/var/lib/mysql
 
 volumes:
-  dbdata:
+    dbdata:
+    traefik-public-certificates:
