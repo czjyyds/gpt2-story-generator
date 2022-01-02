@@ -23,10 +23,10 @@ pipeline {
                 sh '''
                 rm ${WORKSPACE}/src/config.ini
                 cp ${LOCAL_STORAGE_PATH}/config/config.ini ${WORKSPACE}/src/
-                rm ${WORKSPACE}/src/generation/model/*
-                cp ${LOCAL_STORAGE_PATH}/generation/* ${WORKSPACE}/src/generation/model/
-                rm ${WORKSPACE}/src/video_search/model/*
-                cp ${LOCAL_STORAGE_PATH}/video_search/* ${WORKSPACE}/src/video_search/model/
+                rm -r ${WORKSPACE}/src/generation/model/
+                cp -r ${LOCAL_STORAGE_PATH}/generation/model ${WORKSPACE}/src/generation/
+                rm -r ${WORKSPACE}/src/video_search/model/
+                cp -r ${LOCAL_STORAGE_PATH}/video_search/model ${WORKSPACE}/src/video_search/
                 '''
             }
         }
