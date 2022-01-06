@@ -15,9 +15,5 @@
 [providers]
   [providers.docker]
     exposedByDefault = false
-
-[certificatesResolvers.letsencrypt.acme]
-  email = "info@spanking.wiki"
-  storage= "acme.json"
-  [certificatesResolvers.letsencrypt.acme.httpChallenge]
-    entryPoint = "web"
+  [providers.file]
+    filename = "/etc/traefik/cert.toml"

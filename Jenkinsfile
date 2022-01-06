@@ -27,6 +27,8 @@ pipeline {
                 cp -r ${LOCAL_STORAGE_PATH}/generation/model ${WORKSPACE}/src/generation/
                 rm -r ${WORKSPACE}/src/video_search/model/
                 cp -r ${LOCAL_STORAGE_PATH}/video_search/model ${WORKSPACE}/src/video_search/
+                rm -r ${WORKSPACE}/etc/cert/
+                cp -r ${LOCAL_STORAGE_PATH}/cert ${WORKSPACE}/etc/
                 '''
             }
         }
