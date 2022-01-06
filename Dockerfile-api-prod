@@ -13,4 +13,4 @@ EXPOSE 8000
 
 WORKDIR /app/src
 
-CMD [ "uvicorn", "api:app", "--host", "0.0.0.0", "--reload"]
+CMD [ "uvicorn", "api:app", "--host", "0.0.0.0"]

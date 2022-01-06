@@ -1,0 +1,11 @@
+[tls]
+  [tls.stores]
+    [tls.stores.default]
+      [tls.stores.default.defaultCertificate]
+        certFile = "/etc/cert/api.crt"
+        keyFile = "/etc/cert/api.key"
+
+  [[tls.certificates]]
+        certFile = "/etc/cert/api.crt"
+        keyFile = "/etc/cert/api.key"
+    stores = ["default"]

@@ -1,16 +1,27 @@
 version: '3.8'
 
 services:
+  traefik:
+    image: traefik
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - $PWD/services/traefik:/etc/traefik
+      - $PWD/etc/cert:/etc/cert
+
   api:
     build:
       context: .
       dockerfile: Dockerfile-api
-    command:  uvicorn api:app --host 0.0.0.0 --reload
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.app-http.rule=Host(`api.spanking.wiki`)
+      - traefik.http.routers.app-http.tls=true
     volumes:
-       - ./src:/app/src:cached
-    ports:
-      - 8000:8000
-    working_dir: /app/src
+      - ./src:/app/src:cached
 
   discord:
     build:
@@ -18,7 +29,7 @@ services:
       dockerfile: Dockerfile-discord
     command: python discord_bot.py
     ports:
-      - 8080:8080
+      - 9090:8080
     working_dir: /app/src
 
   db:
@@ -26,16 +37,16 @@ services:
     command: --max_allowed_packet=64M
     env_file: env/db.env
     ports:
-      - 3306:3306
+      - 3307:3306
     volumes:
       - dbdata:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin
     ports:
-      - 9090:80
+      - 9999:80
     environment:
       - PMA_ARBITRARY=1
 
 volumes:
-  dbdata:
+    dbdata:

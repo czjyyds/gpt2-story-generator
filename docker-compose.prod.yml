@@ -9,20 +9,17 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - $PWD/services/traefik/traefik.toml:/etc/traefik/traefik.toml
-      - traefik-public-certificates:/certificates
+      - $PWD/services/traefik:/etc/traefik
+      - $PWD/etc/cert:/etc/cert
 
   api:
     build:
       context: .
-      dockerfile: Dockerfile-api
-    command: uvicorn api:app --host 0.0.0.0
-    working_dir: /app/src
+      dockerfile: Dockerfile-api-prod
     labels:
       - traefik.enable=true
       - traefik.http.routers.app-http.rule=Host(`api.spanking.wiki`)
       - traefik.http.routers.app-http.tls=true
-      - traefik.http.routers.app-http.tls.certresolver=letsencrypt
 
   discord:
     build:
@@ -44,4 +41,3 @@ services:
 
 volumes:
     dbdata:
-    traefik-public-certificates:
