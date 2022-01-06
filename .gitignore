@@ -40,3 +40,4 @@ src/config.ini
 
 # cert
 etc/cert/*
+!etc/cert/.gitkeep
