@@ -12,14 +12,14 @@ services:
       - $PWD/services/traefik:/etc/traefik
       - $PWD/etc/cert:/etc/cert
 
-  api:
-    build:
-      context: .
-      dockerfile: Dockerfile-api-prod
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.app-http.rule=Host(`api.spanking.wiki`)
-      - traefik.http.routers.app-http.tls=true
+#  api:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile-api-prod
+#    labels:
+#      - traefik.enable=true
+#      - traefik.http.routers.app-http.rule=Host(`api.spanking.wiki`)
+#      - traefik.http.routers.app-http.tls=true
 
   discord:
     build:
