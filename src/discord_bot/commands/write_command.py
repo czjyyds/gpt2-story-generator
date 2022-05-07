@@ -2,7 +2,6 @@ import threading
 import time
 
 from discord_bot.commands.base_command import BaseCommand
-from generation.generate import Generate
 from generation.sanitization import *
 
 
@@ -13,13 +12,14 @@ class WriteCommand(BaseCommand):
 
     COMMAND_OPTION = 'write'
 
-    def __init__(self, client, config):
+    def __init__(self, client, config, model):
         """
         :param client: discord client
         :param config: configparser
+        :param model: generation model
         """
         self.client = client
-        self.model = Generate()
+        self.model = model
         self.config = config[self.COMMAND_OPTION]
         self.max_length = int(self.config['max_length'])
         self.min_length = int(self.config['min_length'])
