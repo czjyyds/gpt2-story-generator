@@ -15,3 +15,4 @@ requests==2.22.0
 ujson==2.0.3
 six~=1.16.0
 opencc
+protobuf==3.20.*
