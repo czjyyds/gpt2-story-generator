@@ -784,7 +784,7 @@ def sample(news_config: GroverConfig, initial_context, eos_token, min_len, ignor
 
         # TODO: parameterize maximum_iterations
         tokens, cache, probs = tf.while_loop(
-            cond=cond, body=body, maximum_iterations=50,
+            cond=cond, body=body, maximum_iterations=120,
             loop_vars=[ctx, cache, probs],
             shape_invariants=[tf.TensorShape([batch_size, None]),
                               tf.TensorShape(
